@@ -8,6 +8,11 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.loop_input",
+						"type": "Expression"
+					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "last_cdc",
@@ -39,7 +44,7 @@
 									"parameters": {
 										"container": "bronze",
 										"folderName": {
-											"value": "@{item().tableName}_cdc",
+											"value": "@{item().table}_cdc",
 											"type": "Expression"
 										},
 										"fileName": "cdc.json"
@@ -94,7 +99,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "Select * from @{item().schemaName}.@{item().tableName} where @{item().cdc_col} > '@{if(empty(item().from_date),\n            activity('last_cdc').output.value[0].cdc, \n            item().from_date)}'\n",
+										"value": "Select * from @{item().schema}.@{item().table} where @{item().cdc_col} > '@{if(empty(item().from_date),\n            activity('last_cdc').output.value[0].cdc, \n            item().from_date)}'\n",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -132,11 +137,11 @@
 									"parameters": {
 										"container": "bronze",
 										"folder": {
-											"value": "@item().tableName",
+											"value": "@item().table",
 											"type": "Expression"
 										},
 										"file": {
-											"value": "@concat(item().tableName,'_',variables('current'))",
+											"value": "@concat(item().table,'_',variables('current'))",
 											"type": "Expression"
 										}
 									}
@@ -180,11 +185,11 @@
 												"parameters": {
 													"container": "bronze",
 													"folder": {
-														"value": "@item().tableName",
+														"value": "@item().table",
 														"type": "Expression"
 													},
 													"file": {
-														"value": "@concat(item().tableName,'_',variables('current'))",
+														"value": "@concat(item().table,'_',variables('current'))",
 														"type": "Expression"
 													}
 												}
@@ -220,7 +225,7 @@
 												{
 													"type": "Query",
 													"text": {
-														"value": "select max(@{item().cdc_col}) as cdc from @{item().schemaName}.@{item().tableName}",
+														"value": "select max(@{item().cdc_col}) as cdc from @{item().schema}.@{item().table}",
 														"type": "Expression"
 													}
 												}
@@ -286,7 +291,7 @@
 												"parameters": {
 													"container": "bronze",
 													"folderName": {
-														"value": "@{item().tableName}_cdc",
+														"value": "@{item().table}_cdc",
 														"type": "Expression"
 													},
 													"fileName": "empty.json"
@@ -300,7 +305,7 @@
 												"parameters": {
 													"container": "bronze",
 													"folderName": {
-														"value": "@{item().tableName}_cdc",
+														"value": "@{item().table}_cdc",
 														"type": "Expression"
 													},
 													"fileName": "cdc.json"
