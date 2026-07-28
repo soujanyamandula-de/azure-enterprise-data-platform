@@ -1,0 +1,33 @@
+{
+	"name": "Fintech_BronzeLayer_Target",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Fintech_Target_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().tableName,'.parquet')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "bronze/@{dataset().tableName}",
+					"type": "Expression"
+				},
+				"fileSystem": "fintech"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

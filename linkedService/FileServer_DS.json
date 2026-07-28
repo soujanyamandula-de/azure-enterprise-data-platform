@@ -1,0 +1,17 @@
+{
+	"name": "FileServer_DS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "E:\\Projects\\Moon\\bin",
+			"userId": "LAPTOP-IF11CNO6\\SAIKIRAN",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2Mjk4MmM2Yy03YzUzLTQ5NjEtOWJiNy1kOTBmZDI3NDViZDEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "Self-hosted-IR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

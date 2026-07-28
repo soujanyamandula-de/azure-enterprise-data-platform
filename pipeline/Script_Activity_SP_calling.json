@@ -1,0 +1,44 @@
+{
+	"name": "Script_Activity_SP_calling",
+	"properties": {
+		"activities": [
+			{
+				"name": "Script1",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "SQL_DB_LS",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"parameters": [
+								{
+									"name": "TotalEmployees",
+									"type": "Int32",
+									"value": null,
+									"direction": "Output"
+								}
+							],
+							"type": "NonQuery",
+							"text": "EXEC usp_GetEmployeeCount @TotalEmployees = @TotalEmployees OUTPUT;"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-07-28T04:05:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

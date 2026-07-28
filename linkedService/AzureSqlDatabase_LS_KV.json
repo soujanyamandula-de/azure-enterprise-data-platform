@@ -1,0 +1,25 @@
+{
+	"name": "AzureSqlDatabase_LS_KV",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "gloss-dev-sever1.database.windows.net",
+			"database": "gloss-dev-db",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "smandula",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "db-password",
+				"secretVersion": "a154c1ce0dba4a12bf81200a4d463f7a"
+			}
+		}
+	}
+}
