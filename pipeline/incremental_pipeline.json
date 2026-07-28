@@ -292,7 +292,10 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"container": "bronze",
-										"folderName": "cdc",
+										"folderName": {
+											"value": "@{pipeline().parameters.tableName}_cdc",
+											"type": "Expression"
+										},
 										"fileName": "cdc.json"
 									}
 								}
